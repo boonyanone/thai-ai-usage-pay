@@ -1,45 +1,35 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { 
-  MessageSquare, 
-  FileText, 
-  Mic, 
-  Search, 
-  Users, 
-  BookOpen,
-  Calculator,
-  Languages
-} from "lucide-react";
-
-const quickActions = [
-  { icon: MessageSquare, label: "แชทกับ AI", color: "bg-blue-500" },
-  { icon: FileText, label: "วิเคราะห์เอกสาร", color: "bg-green-500" },
-  { icon: Mic, label: "บันทึกประชุม", color: "bg-red-500" },
-  { icon: Search, label: "ค้นหาข้อมูล", color: "bg-purple-500" },
-  { icon: Users, label: "ทำงานร่วมกัน", color: "bg-orange-500" },
-  { icon: BookOpen, label: "เขียนรายงาน", color: "bg-teal-500" },
-  { icon: Calculator, label: "วิเคราะห์ข้อมูล", color: "bg-indigo-500" },
-  { icon: Languages, label: "แปลภาษา", color: "bg-pink-500" }
-];
+import { MessageSquare, FileText, Image, Video, Brain, Zap } from "lucide-react";
 
 const QuickAccessPanel = () => {
+  const quickActions = [
+    { icon: MessageSquare, label: "แชทบอท", description: "สนทนากับ AI", color: "bg-blue-50 text-blue-600 hover:bg-blue-100" },
+    { icon: FileText, label: "เขียนเอกสาร", description: "สร้างเอกสาร", color: "bg-green-50 text-green-600 hover:bg-green-100" },
+    { icon: Image, label: "สร้างภาพ", description: "สร้างรูปภาพ", color: "bg-purple-50 text-purple-600 hover:bg-purple-100" },
+    { icon: Video, label: "บันทึกประชุม", description: "บันทึกและสรุป", color: "bg-orange-50 text-orange-600 hover:bg-orange-100" },
+    { icon: Brain, label: "วิเคราะห์ข้อมูล", description: "วิเคราะห์ข้อมูล", color: "bg-red-50 text-red-600 hover:bg-red-100" },
+    { icon: Zap, label: "เครื่องมืออื่นๆ", description: "เครื่องมือเพิ่มเติม", color: "bg-yellow-50 text-yellow-600 hover:bg-yellow-100" },
+  ];
+
   return (
-    <Card className="w-full">
+    <Card>
       <CardHeader>
-        <CardTitle>เครื่องมือ AI</CardTitle>
+        <CardTitle>เครื่องมือด่วน</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {quickActions.map((action, index) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {quickActions.map((action) => (
             <Button
-              key={index}
+              key={action.label}
               variant="outline"
-              className="h-20 flex flex-col gap-2 hover:scale-105 transition-transform"
+              className={`h-auto p-4 flex flex-col items-center gap-2 ${action.color} border-0`}
             >
-              <div className={`p-2 rounded-lg ${action.color} text-white`}>
-                <action.icon className="h-5 w-5" />
+              <action.icon className="h-6 w-6" />
+              <div className="text-center">
+                <div className="font-medium text-sm">{action.label}</div>
+                <div className="text-xs opacity-70">{action.description}</div>
               </div>
-              <span className="text-xs font-medium">{action.label}</span>
             </Button>
           ))}
         </div>
