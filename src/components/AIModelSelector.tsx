@@ -1,72 +1,110 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Brain, Zap, Star, Coins } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Brain, Zap, DollarSign, Sparkles } from "lucide-react";
 
 const aiModels = [
   {
+    id: "gpt-4",
     name: "GPT-4",
     provider: "OpenAI",
-    cost: "0.03/คำสั่ง",
-    bestFor: "งานเขียน, วิเคราะห์",
+    credits: 10,
+    speed: "ปานกลาง",
+    quality: "สูงมาก",
     icon: Brain,
-    color: "bg-blue-500"
+    description: "โมเดลที่ฉลาดที่สุด เหมาะสำหรับงานซับซ้อน"
   },
   {
+    id: "gpt-3.5-turbo",
+    name: "GPT-3.5 Turbo",
+    provider: "OpenAI", 
+    credits: 5,
+    speed: "เร็ว",
+    quality: "สูง",
+    icon: Zap,
+    description: "สมดุลระหว่างความเร็วและคุณภาพ"
+  },
+  {
+    id: "claude-3",
     name: "Claude 3",
-    provider: "Anthropic", 
-    cost: "0.025/คำสั่ง",
-    bestFor: "โค้ด, งานวิจัย",
-    icon: Sparkles,
-    color: "bg-purple-500"
+    provider: "Anthropic",
+    credits: 8,
+    speed: "ปานกลาง",
+    quality: "สูงมาก", 
+    icon: Star,
+    description: "เก่งในการวิเคราะห์และเขียน"
   },
   {
+    id: "gemini-pro",
     name: "Gemini Pro",
     provider: "Google",
-    cost: "0.02/คำสั่ง", 
-    bestFor: "แปลภาษา, สรุป",
-    icon: Zap,
-    color: "bg-orange-500"
+    credits: 6,
+    speed: "เร็ว",
+    quality: "สูง",
+    icon: Brain,
+    description: "เชี่ยวชาญด้านการค้นหาและข้อมูล"
   }
 ];
 
-const AIModelSelector = () => {
+interface AIModelSelectorProps {
+  selected: string;
+  onSelect: (model: string) => void;
+}
+
+export const AIModelSelector = ({ selected, onSelect }: AIModelSelectorProps) => {
+  const selectedModel = aiModels.find(m => m.id === selected) || aiModels[0];
+
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Brain className="h-5 w-5" />
-          เลือก AI Model
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-3">
-        {aiModels.map((model, index) => (
-          <div key={index} className="flex items-center justify-between p-3 border rounded-lg hover:bg-muted/50 transition-colors">
-            <div className="flex items-center gap-3">
-              <div className={`p-2 rounded-lg ${model.color} text-white`}>
-                <model.icon className="h-4 w-4" />
+    <div className="space-y-2">
+      <Label className="text-sm font-medium">เลือกโมเดล AI</Label>
+      <Select value={selected} onValueChange={onSelect}>
+        <SelectTrigger className="w-full">
+          <SelectValue>
+            <div className="flex items-center justify-between w-full">
+              <div className="flex items-center gap-2">
+                <selectedModel.icon className="h-4 w-4" />
+                <span>{selectedModel.name}</span>
+                <Badge variant="secondary" className="text-xs">
+                  {selectedModel.provider}
+                </Badge>
               </div>
-              <div>
-                <div className="font-medium">{model.name}</div>
-                <div className="text-sm text-muted-foreground">{model.bestFor}</div>
+              <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Coins className="h-3 w-3" />
+                {selectedModel.credits}
               </div>
             </div>
-            <div className="text-right">
-              <Badge variant="outline" className="mb-1">
-                <DollarSign className="h-3 w-3 mr-1" />
-                {model.cost}
-              </Badge>
-              <div className="text-xs text-muted-foreground">{model.provider}</div>
-            </div>
-          </div>
-        ))}
-        
-        <Button className="w-full mt-4" variant="outline">
-          ให้ AI เลือกให้อัตโนมัติ
-        </Button>
-      </CardContent>
-    </Card>
+          </SelectValue>
+        </SelectTrigger>
+        <SelectContent>
+          {aiModels.map((model) => (
+            <SelectItem key={model.id} value={model.id}>
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-2">
+                  <model.icon className="h-4 w-4" />
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium">{model.name}</span>
+                      <Badge variant="secondary" className="text-xs">
+                        {model.provider}
+                      </Badge>
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {model.description}
+                    </div>
+                    <div className="text-xs text-muted-foreground mt-1">
+                      ความเร็ว: {model.speed} | คุณภาพ: {model.quality}
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 text-xs font-medium">
+                  <Coins className="h-3 w-3" />
+                  {model.credits}
+                </div>
+              </div>
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
   );
 };
-
-export default AIModelSelector;

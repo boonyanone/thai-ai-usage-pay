@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/button";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import CreditDashboard from "@/components/CreditDashboard";
-import AIModelSelector from "@/components/AIModelSelector";
 import QuickAccessPanel from "@/components/QuickAccessPanel";
 import RecentProjects from "@/components/RecentProjects";
 import AIUsageStats from "@/components/AIUsageStats";
+import { AIChat } from "@/components/AIChat";
 import { User, Settings, Bell, LogOut } from "lucide-react";
 
 const Index = () => {
@@ -52,13 +52,18 @@ const Index = () => {
                 <AIUsageStats />
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                 <div className="lg:col-span-2">
                   <QuickAccessPanel />
                 </div>
                 <div>
                   <RecentProjects />
                 </div>
+              </div>
+
+              {/* AI Chat Section */}
+              <div className="max-w-4xl mx-auto">
+                <AIChat />
               </div>
             </div>
           </main>
