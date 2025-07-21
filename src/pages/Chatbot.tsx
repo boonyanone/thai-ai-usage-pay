@@ -1,13 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import CreditDashboard from "@/components/CreditDashboard";
-import QuickAccessPanel from "@/components/QuickAccessPanel";
-import RecentProjects from "@/components/RecentProjects";
-import AIUsageStats from "@/components/AIUsageStats";
-import { User, Settings, Bell, LogOut } from "lucide-react";
+import { AIChat } from "@/components/AIChat";
+import { User, Settings, Bell } from "lucide-react";
 
-const Index = () => {
+const Chatbot = () => {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
@@ -20,7 +17,7 @@ const Index = () => {
               <div className="flex items-center gap-4">
                 <SidebarTrigger />
                 <div className="hidden md:flex text-sm text-muted-foreground">
-                  แดชบอร์ดหลัก - ยินดีต้อนรับ
+                  แชทบอท - AI Assistant
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -42,22 +39,13 @@ const Index = () => {
           <main className="flex-1 p-6 overflow-auto">
             <div className="max-w-7xl mx-auto">
               <div className="mb-8">
-                <h1 className="text-3xl font-bold text-foreground">ยินดีต้อนรับ</h1>
-                <p className="text-muted-foreground">ภาพรวมการใช้งาน AI ของคุณวันนี้</p>
+                <h1 className="text-3xl font-bold text-foreground">แชทบอท AI</h1>
+                <p className="text-muted-foreground">เลือก Persona และ AI Model เพื่อเริ่มสนทนา</p>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
-                <CreditDashboard />
-                <AIUsageStats />
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2">
-                  <QuickAccessPanel />
-                </div>
-                <div>
-                  <RecentProjects />
-                </div>
+              {/* AI Chat Section */}
+              <div className="max-w-4xl mx-auto">
+                <AIChat />
               </div>
             </div>
           </main>
@@ -67,4 +55,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Chatbot;
