@@ -1,6 +1,7 @@
 import { GraduationCap, Briefcase, Shield, FlaskConical, User, Building, MapPin } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const personas = [
   { 
@@ -53,34 +54,44 @@ interface PersonaSelectorProps {
 }
 
 export const PersonaSelector = ({ selected, onSelect }: PersonaSelectorProps) => {
-  const selectedPersona = personas.find(p => p.id === selected) || personas[4]; // default to general
-
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       <Label className="text-sm font-medium">เลือก Persona</Label>
-      <Select value={selected} onValueChange={onSelect}>
-        <SelectTrigger className="w-full">
-          <SelectValue>
-            <div className="flex items-center gap-2">
-              <selectedPersona.icon className="h-4 w-4" />
-              <span>{selectedPersona.label}</span>
-            </div>
-          </SelectValue>
-        </SelectTrigger>
-        <SelectContent>
-          {personas.map((persona) => (
-            <SelectItem key={persona.id} value={persona.id}>
-              <div className="flex items-center gap-2">
-                <persona.icon className="h-4 w-4" />
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        {personas.map((persona) => (
+          <Card 
+            key={persona.id} 
+            className={`cursor-pointer transition-all duration-200 hover:shadow-md ${
+              selected === persona.id 
+                ? 'ring-2 ring-primary bg-primary/5' 
+                : 'hover:bg-muted/50'
+            }`}
+            onClick={() => onSelect(persona.id)}
+          >
+            <CardContent className="p-3 text-center">
+              <div className="flex flex-col items-center gap-2">
+                <div className={`p-2 rounded-lg ${
+                  selected === persona.id 
+                    ? 'bg-primary text-primary-foreground' 
+                    : 'bg-muted'
+                }`}>
+                  <persona.icon className="h-5 w-5" />
+                </div>
                 <div>
-                  <div className="font-medium">{persona.label}</div>
-                  <div className="text-xs text-muted-foreground">{persona.description}</div>
+                  <div className={`text-sm font-medium ${
+                    selected === persona.id ? 'text-primary' : ''
+                  }`}>
+                    {persona.label}
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-1">
+                    {persona.description}
+                  </div>
                 </div>
               </div>
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 };
