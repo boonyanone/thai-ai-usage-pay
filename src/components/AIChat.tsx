@@ -157,18 +157,11 @@ export const AIChat = () => {
         />
       </div>
 
-      <div className="flex-1 flex flex-col gap-4">
+      <div className="flex-1 flex flex-col gap-4 pb-0">
         {/* Messages */}
         <div className="flex-1 overflow-y-auto space-y-4">
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full text-center">
-              <Sparkles className="h-12 w-12 text-muted-foreground/50 mb-3" />
-              <h3 className="font-medium text-muted-foreground mb-2">
-                เริ่มต้นการสนทนากับ AI
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                เลือก persona และโมเดล AI แล้วเริ่มถามคำถาม
-              </p>
               <div className="w-full">
                 <QuestionSuggestions 
                   persona={selectedPersona} 
@@ -293,7 +286,7 @@ export const AIChat = () => {
         </div>
 
         {/* Input Area */}
-        <div className="space-y-3">
+        <div className="space-y-3 p-4 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           {/* AI Model Selector */}
           <div className="flex items-center gap-3">
             <div className="w-auto">
@@ -316,12 +309,12 @@ export const AIChat = () => {
                     handleSendMessage();
                   }
                 }}
-                className="min-h-[40px] max-h-24 resize-none pr-10"
+                className="min-h-[40px] max-h-24 resize-none pr-10 border-2 focus:border-primary/50"
               />
               <Button 
                 variant="ghost" 
                 size="icon"
-                className="absolute right-2 top-2 h-6 w-6"
+                className="absolute right-2 top-2 h-6 w-6 hover:bg-muted"
               >
                 <Paperclip className="h-4 w-4" />
               </Button>
@@ -330,7 +323,7 @@ export const AIChat = () => {
               onClick={() => handleSendMessage()} 
               disabled={!inputMessage.trim() || isLoading}
               size="icon"
-              className="self-end h-[40px]"
+              className="self-end h-[40px] shadow-md hover:shadow-lg transition-shadow"
             >
               <Send className="h-4 w-4" />
             </Button>
