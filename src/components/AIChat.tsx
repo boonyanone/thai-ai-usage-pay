@@ -145,24 +145,20 @@ export const AIChat = () => {
   };
 
   return (
-    <div className="h-[600px] flex flex-col">
-      <div className="pb-3">
-        <div className="flex items-center gap-2 mb-4">
-          <Sparkles className="h-5 w-5 text-primary" />
-          <h2 className="text-xl font-semibold">AI Assistant</h2>
-        </div>
+    <div className="w-full max-w-4xl mx-auto h-[calc(100vh-240px)] flex flex-col">
+      <div className="px-6 py-4">
         <PersonaSelector 
           selected={selectedPersona} 
           onSelect={setSelectedPersona} 
         />
       </div>
 
-      <div className="flex-1 flex flex-col gap-4 pb-0">
+      <div className="flex-1 flex flex-col">
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto space-y-4">
+        <div className="flex-1 overflow-y-auto px-6 py-4">
           {messages.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full text-center">
-              <div className="w-full">
+            <div className="flex flex-col items-center justify-center h-full">
+              <div className="w-full max-w-2xl space-y-6">
                 <QuestionSuggestions 
                   persona={selectedPersona} 
                   onSelect={handleSendMessage} 
