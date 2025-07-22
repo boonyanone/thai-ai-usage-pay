@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Send, Sparkles, Share2, ThumbsUp, ThumbsDown, ExternalLink } from "lucide-react";
+import { Send, Sparkles, Share2, ThumbsUp, ThumbsDown, ExternalLink, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -145,25 +145,19 @@ export const AIChat = () => {
   };
 
   return (
-    <Card className="h-[600px] flex flex-col">
-      <CardHeader className="pb-3">
-        <CardTitle className="flex items-center gap-2">
+    <div className="h-[600px] flex flex-col">
+      <div className="pb-3">
+        <div className="flex items-center gap-2 mb-4">
           <Sparkles className="h-5 w-5 text-primary" />
-          AI Assistant
-        </CardTitle>
-        <div className="flex flex-col gap-3">
-          <PersonaSelector 
-            selected={selectedPersona} 
-            onSelect={setSelectedPersona} 
-          />
-          <AIModelSelector 
-            selected={selectedModel} 
-            onSelect={setSelectedModel} 
-          />
+          <h2 className="text-xl font-semibold">AI Assistant</h2>
         </div>
-      </CardHeader>
+        <PersonaSelector 
+          selected={selectedPersona} 
+          onSelect={setSelectedPersona} 
+        />
+      </div>
 
-      <CardContent className="flex-1 flex flex-col gap-4 p-4">
+      <div className="flex-1 flex flex-col gap-4">
         {/* Messages */}
         <div className="flex-1 overflow-y-auto space-y-4">
           {messages.length === 0 ? (
@@ -175,10 +169,12 @@ export const AIChat = () => {
               <p className="text-sm text-muted-foreground mb-4">
                 เลือก persona และโมเดล AI แล้วเริ่มถามคำถาม
               </p>
-              <QuestionSuggestions 
-                persona={selectedPersona} 
-                onSelect={handleSendMessage} 
-              />
+              <div className="w-full">
+                <QuestionSuggestions 
+                  persona={selectedPersona} 
+                  onSelect={handleSendMessage} 
+                />
+              </div>
             </div>
           ) : (
             messages.map((message) => (
@@ -297,29 +293,50 @@ export const AIChat = () => {
         </div>
 
         {/* Input Area */}
-        <div className="flex gap-2">
-          <Textarea
-            placeholder="พิมพ์คำถามของคุณ..."
-            value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleSendMessage();
-              }
-            }}
-            className="min-h-[40px] max-h-24 resize-none"
-          />
-          <Button 
-            onClick={() => handleSendMessage()} 
-            disabled={!inputMessage.trim() || isLoading}
-            size="icon"
-            className="self-end h-[40px]"
-          >
-            <Send className="h-4 w-4" />
-          </Button>
+        <div className="space-y-3">
+          {/* AI Model Selector */}
+          <div className="flex items-center gap-3">
+            <div className="w-auto">
+              <AIModelSelector 
+                selected={selectedModel} 
+                onSelect={setSelectedModel} 
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-2">
+            <div className="flex-1 relative">
+              <Textarea
+                placeholder="พิมพ์คำถามของคุณ..."
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSendMessage();
+                  }
+                }}
+                className="min-h-[40px] max-h-24 resize-none pr-10"
+              />
+              <Button 
+                variant="ghost" 
+                size="icon"
+                className="absolute right-2 top-2 h-6 w-6"
+              >
+                <Paperclip className="h-4 w-4" />
+              </Button>
+            </div>
+            <Button 
+              onClick={() => handleSendMessage()} 
+              disabled={!inputMessage.trim() || isLoading}
+              size="icon"
+              className="self-end h-[40px]"
+            >
+              <Send className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };

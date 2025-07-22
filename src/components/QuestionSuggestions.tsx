@@ -72,12 +72,12 @@ export const QuestionSuggestions = ({ persona, onSelect }: QuestionSuggestionsPr
       <h4 className="text-sm font-medium text-muted-foreground">
         คำถามแนะนำสำหรับ {getPersonaLabel(persona)}
       </h4>
-      <div className="grid grid-cols-1 gap-2">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {questions.map((question, index) => (
           <Button
             key={index}
-            variant="outline"
-            className="h-auto p-3 text-left justify-start whitespace-normal"
+            variant="ghost"
+            className="h-auto p-3 text-left justify-start whitespace-normal bg-muted/30 hover:bg-muted/50"
             onClick={() => onSelect(question)}
           >
             <span className="text-sm">{question}</span>
