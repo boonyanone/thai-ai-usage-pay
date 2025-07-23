@@ -145,8 +145,8 @@ export const AIChat = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto h-[calc(100vh-240px)] flex flex-col">
-      <div className="px-6 py-4">
+    <div className="w-full h-[calc(100vh-240px)] flex flex-col">
+      <div className="pb-6">
         <PersonaSelector 
           selected={selectedPersona} 
           onSelect={setSelectedPersona} 
@@ -155,7 +155,7 @@ export const AIChat = () => {
 
       <div className="flex-1 flex flex-col">
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto px-6 py-4">
+        <div className="flex-1 overflow-y-auto">
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full">
               <div className="w-full max-w-2xl space-y-6">
