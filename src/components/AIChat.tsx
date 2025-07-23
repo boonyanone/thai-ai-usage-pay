@@ -282,7 +282,7 @@ export const AIChat = () => {
         </div>
 
         {/* Input Area */}
-        <div className="space-y-3 p-4 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="space-y-3 p-4 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky bottom-0">
           {/* AI Model Selector */}
           <div className="flex items-center gap-3">
             <div className="w-auto">
