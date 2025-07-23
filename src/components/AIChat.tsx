@@ -155,10 +155,10 @@ export const AIChat = () => {
 
       <div className="flex-1 flex flex-col">
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto px-4 space-y-4">
           {messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full">
-              <div className="w-full max-w-2xl space-y-6">
+              <div className="w-full space-y-6">
                 <QuestionSuggestions 
                   persona={selectedPersona} 
                   onSelect={handleSendMessage} 
